@@ -1,0 +1,74 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+    <head>
+        <!-- Compiled and minified CSS -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        <title>Foodbit</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="{% static 'js/materialize.js' %}"></script>
+        <script src="{% static 'js/init.js' %}"></script>
+                  
+    </head>
+    
+    <body>
+        <nav class="white" role="navigation">
+          <div class="nav-wrapper container">
+            <a id="logo-container" href="/" class="brand-logo">FoodBit</a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="foodform">Donate Food</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="side-nav">
+              <li><a href="#">Donate Food</a></li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+          </div>
+        </nav>
+        
+
+        
+        {% for food in allFood %}
+            <div class="row">
+                <div class="col s12 m7 offset-m2">
+                  <div class="card large">
+                    <div class="card-image">
+                      <img src={{food.image}}>
+                      <span class="card-title">{{food.title}}</span>
+                    </div>
+                    <div class="card-content">
+                      <p>Event: {{food.title}}</p>
+                      <p>Donor's Name: {{food.name}}</p>
+                      <p>Location of the provider: {{ food.location }}</p>
+                      <p>Best before: {{ food.time }}</p>
+                      <p>Organization: {{ food.organization }}</p>
+                      <p>Food Types: {{food.foodtype}}</p>
+                      <p>Description: {{food.description}}</p>
+                      <p><a href="#"> Event Link</a></p>
+                      </div>
+                  </div>
+                  <iframe
+                    width="600"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDBY6iWRdwPpNU42g4cgXFvpeO-sW8-ocU
+                      &q={{food.location}}" allowfullscreen>
+                  </iframe>
+                  <form method="post" action="/foodlist">
+                  {% csrf_token %}
+                    <input name="id" value="{{food.id}}" type="hidden">
+                    <button class="btn waves-effect waves-light" type="delete" name="action">delete
+                              <i class="material-icons right"></i>
+                          </button>
+
+                  </form>
+
+                </div>
+        {% endfor %}
+    </body>
+</html>

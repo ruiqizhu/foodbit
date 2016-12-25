@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+    <head>
+        <!-- Compiled and minified CSS -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        <title>Foodbit</title>
+
+  <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="{% static 'js/materialize.js' %}"></script>
+        <script src="{% static 'js/init.js' %}"></script>
+                  
+    </head>
+    
+    <body>
+        <nav class="white" role="navigation">
+          <div class="nav-wrapper container">
+            <a id="logo-container" href="/" class="brand-logo">FoodBit</a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="foodlist">Find Food</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="side-nav">
+              <li><a href="#">Donate Food</a></li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+          </div>
+        </nav>
+          
+        <div class="row">
+            <div class="col m8 offset-m2 s12">
+                <div class="card-panel">
+                    <form method="post" action="/foodform">
+                        {% csrf_token %}
+                        <div class="input-field">
+                          <input name="title" id="title" type="text" class="validate">
+                          <label for="title">Event title (ex. Pizza at Wean Hall) </label>
+                        </div>
+                        <div class="input-field">
+                          <input name="name" id="name" type="text" class="validate">
+                          <label for="name">Your Name</label>
+                        </div>
+                        <div class="input-field">
+                          <input name="location" id="location" type="text" class="validate">
+                          <label for="location">Your Location</label>
+                        </div>
+                        <div class="input-field">
+                          <input name="time" id="time" type="text" class="validate">
+                          <label for="time">Best before (MM/DD/YYYY) </label>
+                        </div>
+                        <div class="input-field">
+                          <input name="organization" id="organization" type="text" class="validate">
+                          <label for="organization">Your Organization Name (Put None if you are individual)</label>
+                        </div>
+                        <div class="input-field">
+                          <input name="foodtype" id="foodtype" type="text" class="validate">
+                          <label for="foodtype">Foodtype (What food do you provide)</label>
+                        </div>  
+                        <div class="input-field">
+                          <input name="description" id="description" type="text" class="validate">
+                          <label for="description">Description</label>
+                        </div>
+                        <div class="input-field">
+                          <input name="image" id="image" type="text" class="validate">
+                          <label for="image">Your Image</label>
+                        </div>            
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                            <i class="material-icons right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        
+    </body>
+</html>
